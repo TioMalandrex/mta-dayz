@@ -1453,13 +1453,13 @@ addCommandHandler("give", function(source, _, target, amount)
 		if tonumber(amount) >= 1 and zKills >= tonumber(amount) then
 			setElementData(source,"zombieskilled",getElementData(source,"zombieskilled")-amount);
 			setElementData(target,"zombieskilled",getElementData(target,"zombieskilled")+amount);
-			outputChatBox(tostring(amount).." zKills has been sent to "..getPlayerName(target):gsub("#%x%x%x%x%x%x", "").."!",source,50,150,50)
-			outputChatBox("You received "..tostring(amount).." zKills from "..getPlayerName(source):gsub("#%x%x%x%x%x%x", "").."!",target,50,150,50)
+			outputChatBox(tostring(amount).." zKills foram enviados para "..getPlayerName(target):gsub("#%x%x%x%x%x%x", "").."!",source,50,150,50)
+			outputChatBox("Você recebeu "..tostring(amount).." zKills de "..getPlayerName(source):gsub("#%x%x%x%x%x%x", "").."!",target,50,150,50)
 		else
-			outputChatBox("You don't have that much zKills!",source,150,50,50)
+			outputChatBox("Você não tem tantos zKills!",source,150,50,50)
 		end
 	else
-		outputChatBox("Player not found!",source,150,50,50)
+		outputChatBox("Jogador não encontrado!",source,150,50,50)
 	end
 end);
 

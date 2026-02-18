@@ -5,7 +5,7 @@ function main()
 	function dutyMode()
 		if not getElementData(localPlayer,"dutyMode") then
 			setElementData(localPlayer,"dutyMode",true)
-			guiSetText(labelDutyText,"ON")
+			guiSetText(labelDutyText,"LIGADO")
 			guiLabelSetColor(labelDutyText, 0, 255, 0)
 			SupermanStart()
 			defaultBlood = getElementData(localPlayer,"blood")
@@ -13,7 +13,7 @@ function main()
 			setElementData(localPlayer,"zombie",true)
 		else
 			setElementData(localPlayer,"dutyMode",false)
-			guiSetText(labelDutyText,"OFF")
+			guiSetText(labelDutyText,"DESLIGADO")
 			guiLabelSetColor(labelDutyText, 255, 0, 0)
 			SupermanStop()
 			dutyInvincibility(false)
@@ -26,9 +26,9 @@ function main()
 		for i,player in ipairs(players) do
 			if getElementData(player,"dutyMode") then
 				-- shadow
-				dxDrawTextOnElement(player,"Duty Mode",0.4,20,0,0,0,255,1.42,"sans")
+				dxDrawTextOnElement(player,"Modo Trabalho",0.4,20,0,0,0,255,1.42,"sans")
 				-- text
-				dxDrawTextOnElement(player,"Duty Mode",0.41,20,255,255,255,255,1.4,"sans")
+				dxDrawTextOnElement(player,"Modo Trabalho",0.41,20,255,255,255,255,1.4,"sans")
 	  		end
   		end
 	end
@@ -116,25 +116,25 @@ function main()
 				local duration = 300000
 				triggerServerEvent("mutePlayerEvent",localPlayer,selectedPlayer,reason,duration)
 				closeMuteGui()
-				guiSetText(buttonMute,"unmute")
+				guiSetText(buttonMute,"dessilenciar")
 				unMuteText()
 			elseif guiRadioButtonGetSelected(mute10mins) then
 				local duration = 600000
 				triggerServerEvent("mutePlayerEvent",localPlayer,selectedPlayer,reason,duration)
 				closeMuteGui()
-				guiSetText(buttonMute,"unmute")
+				guiSetText(buttonMute,"dessilenciar")
 				unMuteText()
 			elseif guiRadioButtonGetSelected(mute20mins) then
 				local duration = 1200000
 				triggerServerEvent("mutePlayerEvent",localPlayer,selectedPlayer,reason,duration)
 				closeMuteGui()
-				guiSetText(buttonMute,"unmute")
+				guiSetText(buttonMute,"dessilenciar")
 				unMuteText()
 			elseif guiRadioButtonGetSelected(muteUntilReconnect) then
 				local duration = 0
 				triggerServerEvent("mutePlayerEvent",localPlayer,selectedPlayer,reason,duration)
 				closeMuteGui()
-				guiSetText(buttonMute,"unmute")
+				guiSetText(buttonMute,"dessilenciar")
 				unMuteText()
 			end
 		end
@@ -288,7 +288,7 @@ function main()
 				guiSetVisible(window,false)
 				showCursor(false)
 			else
-				outputChatBox("#DF0101[DayZ]#BDBDBD Select a vehicle to spawn it",0,0,0,true)
+				outputChatBox("#DF0101[DayZ]#BDBDBD Selecione um veículo para dar spawn nele",0,0,0,true)
 			end
 		end
 	end

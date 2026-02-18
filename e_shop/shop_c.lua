@@ -123,7 +123,7 @@ function load_shop()
 										shop_humanity_type = humanity_type;
 										updateShop();
 									else
-										outputChatBox("Dealer: You need to have atleast 5000 humanity in order to shop here.",200,55,0)
+										outputChatBox("Vendedor: Você precisa ter pelo menos 5000 de humanidade para comprar aqui.",200,55,0)
 									end
 								elseif (humanity_type == "bandit") then
 									if (getElementData(source,"humanity") <= -5000) then
@@ -134,7 +134,7 @@ function load_shop()
 										shop_humanity_type = humanity_type;
 										updateShop();
 									else
-										outputChatBox("Dealer: You need to have atleast -5000 humanity in order to shop here.",200,55,0)
+										outputChatBox("Vendedor: Você precisa ter pelo menos -5000 de humanidade para comprar aqui.",200,55,0)
 									end
 								elseif (humanity_type == "blackmarket" or humanity_type == "normal") then
 									guiSetVisible(shop_gui.window[1],true)
@@ -200,7 +200,7 @@ function load_shop()
 										vehicle_spawn_position = {v[4],v[5],v[6],v[7],v[8],v[9]}
 										updateShop();
 									else
-										outputChatBox("Dealer: You need to have atleast 5000 humanity in order to shop here.",200,55,0)
+										outputChatBox("Vendedor: Você precisa ter pelo menos 5000 de humanidade para comprar aqui.",200,55,0)
 									end
 								elseif (humanity_type == "bandit") then
 									if (getElementData(source,"humanity") <= -5000) then
@@ -212,7 +212,7 @@ function load_shop()
 										vehicle_spawn_position = {v[4],v[5],v[6],v[7],v[8],v[9]}
 										updateShop();
 									else
-										outputChatBox("Dealer: You need to have atleast -5000 humanity in order to shop here.",200,55,0)
+										outputChatBox("Vendedor: Você precisa ter pelo menos -5000 de humanidade para comprar aqui.",200,55,0)
 									end
 								elseif (humanity_type == "blackmarket" or humanity_type == "normal") then
 									guiSetVisible(shop_gui.window[1],true)
@@ -317,7 +317,7 @@ function buyItem()
 	end
 
 	if (guiGridListGetSelectedItem(shop_gui.gridlist[2] ) == -1) then
-		guiSetText(shop_gui.label[4],"Please select an item")
+		guiSetText(shop_gui.label[4],"Por favor, selecione um item")
 		guiLabelSetColor (shop_gui.label[4],255,0,0)
 	else
 		if (shop_marker_type == "supply") then
@@ -327,11 +327,11 @@ function buyItem()
 			guiLabelSetColor(shop_gui.label[4],255,0,0)
 
 			if (getElementData(localPlayer, currency_item) >= price) then
-				guiSetText(shop_gui.label[4],"You successfully bought "..item..".")
+				guiSetText(shop_gui.label[4],"Você comprou com sucesso "..item..".")
 				guiLabelSetColor (shop_gui.label[4],0,149,14,255)
 				triggerServerEvent("MTAZeu:onClientSuccessBuysItem",localPlayer,target,itemdata,currency_item,amount,price)
 			else
-				guiSetText(shop_gui.label[4],"You don't have enough zKills")
+				guiSetText(shop_gui.label[4],"Você não tem zKills suficientes")
 			end
 		elseif (shop_marker_type == "vehicle") then
 			local target = localPlayer;
@@ -341,15 +341,15 @@ function buyItem()
 			guiLabelSetColor(shop_gui.label[4],255,0,0)
 			if (getElementData(localPlayer,currency_item) >= price) then
 				for i,v in ipairs(getElementsWithinColShape(vehicle_spawn_position_col[shop_marker],"vehicle")) do
-					guiSetText(shop_gui.label[4],"Vehicle spawn area is taken, clear it before buying vehicle.")
+					guiSetText(shop_gui.label[4],"Área de spawn do veículo está ocupada, limpe antes de comprar veículo.")
 					return
 				end
 				guiSetVisible(shop_gui.window[1],false)
 				showCursor(false)
-				outputChatBox("You successfully bought "..vehicleName..".",0,255,0)
+				outputChatBox("Você comprou com sucesso "..vehicleName..".",0,255,0)
 				triggerServerEvent("MTAZeu:onClientSuccessBuysVehicle",localPlayer,target,currency_item,price,x,y,z,rx,ry,rz,id,engine,rotor,tires,tankparts,scrap,slots,fuel)
 			else
-				guiSetText(shop_gui.label[4], "You don't have enough zKills")
+				guiSetText(shop_gui.label[4], "Você não tem zKills suficientes")
 			end
 		end
 	end
@@ -424,7 +424,7 @@ addEventHandler("onClientResourceStart",resourceRoot,function()
 		guiGridListClear(shop_gui.gridlist[1])
 		guiGridListClear(shop_gui.gridlist[2])
 		if (shop_marker_type == "supply") then
-			guiSetText(shop_gui.window[1],"Supply Shop")
+			guiSetText(shop_gui.window[1],"Loja de Suprimentos")
 			guiGridListSetColumnTitle(shop_gui.gridlist[2],1,"Item")
 
 			-- loads categories
@@ -464,7 +464,7 @@ addEventHandler("onClientResourceStart",resourceRoot,function()
 			end
 			addEventHandler("onClientGUIClick",shop_gui.gridlist[1],updateItems,false) 
 		elseif (shop_marker_type == "vehicle") then
-			guiSetText(shop_gui.window[1],"Vehicle Shop")
+			guiSetText(shop_gui.window[1],"Loja de Veículos")
 			guiGridListSetColumnTitle(shop_gui.gridlist[2],1,"Vehicle")
 
 			-- loads categories
