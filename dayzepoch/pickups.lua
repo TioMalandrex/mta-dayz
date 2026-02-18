@@ -571,8 +571,8 @@ setTimer(function()
 end,5000,0);
 
 function refreshItemLootPoints()
-	outputChatBox("#FF0000[Warning] #FFFFFFItem loot respawn in 1 minute!", root, 255, 255, 255, true);
-	outputChatBox("#FF0000[Warning] #FFFFFFAll players, vehicles & peds will freez in 50 seconds!", root, 255, 255, 255, true);
+	outputChatBox("#FF0000[Aviso] #FFFFFFRespawn de itens em 1 minuto!", root, 255, 255, 255, true);
+	outputChatBox("#FF0000[Aviso] #FFFFFFTodos os jogadores, veículos e NPCs serão congelados em 50 segundos!", root, 255, 255, 255, true);
 	setTimer(freezeElements, 50000, 1, true);
 	setTimer(refreshItemLoots, 60000, 1);
 end
