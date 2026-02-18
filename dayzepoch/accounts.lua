@@ -440,7 +440,7 @@ function checkBuggedAccont(player)
 					removeWeaponReplace(player);
 					removeWeaponReplace2(player);
 					spawnDayZPlayer(player);
-					outputChatBox(getPlayerName(player).."'s account is buggy and has been reset.", getRootElement(), 25, 255, 25);
+					outputChatBox("A conta de "..getPlayerName(player).." estava com problemas e foi resetada.", getRootElement(), 25, 255, 25);
 					return;
 				end
 				for _,v in ipairs(playerDataTable) do
@@ -456,7 +456,7 @@ function checkBuggedAccont(player)
 						removeWeaponReplace(player);
 						removeWeaponReplace2(player);
 						spawnDayZPlayer(player);
-						outputChatBox(getPlayerName(player).."'s account is buggy and has been reset.", getRootElement(), 25, 255, 25);
+						outputChatBox("A conta de "..getPlayerName(player).." estava com problemas e foi resetada.", getRootElement(), 25, 255, 25);
 					end
 				end
 			end
