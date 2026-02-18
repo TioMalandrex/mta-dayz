@@ -6,16 +6,16 @@ local language = {window={},staticimage={},combobox={},label={}};
 
 local sW, sH = guiGetScreenSize();
 
-login.window[1] = guiCreateWindow(sW*0.320, sH*0.384, 243, 152, "Please, sign in to continue!", false)
+login.window[1] = guiCreateWindow(sW*0.320, sH*0.384, 243, 152, "Por favor, faça login para continuar!", false)
 guiWindowSetMovable(login.window[1], false)
 guiWindowSetSizable(login.window[1], false)
 
-login.label[1] = guiCreateLabel(16, 25, 211, 15, "Username:", false, login.window[1])
+login.label[1] = guiCreateLabel(16, 25, 211, 15, "Usuário:", false, login.window[1])
 login.edit[1] = guiCreateEdit(10, 40, 224, 24, "", false, login.window[1])
 guiEditSetMaxLength(login.edit[1], 100)
-login.button[1] = guiCreateButton(10, 114, 107, 29, "Sign In", false, login.window[1])
-login.button[2] = guiCreateButton(127, 114, 107, 29, "> register?", false, login.window[1])
-login.label[2] = guiCreateLabel(16, 68, 211, 15, "Password:", false, login.window[1])
+login.button[1] = guiCreateButton(10, 114, 107, 29, "Entrar", false, login.window[1])
+login.button[2] = guiCreateButton(127, 114, 107, 29, "> registrar?", false, login.window[1])
+login.label[2] = guiCreateLabel(16, 68, 211, 15, "Senha:", false, login.window[1])
 login.edit[2] = guiCreateEdit(9, 83, 224, 24, "", false, login.window[1])
 guiEditSetMasked(login.edit[2], true)
 guiEditSetMaxLength(login.edit[2], 100)
@@ -23,25 +23,25 @@ guiEditSetMaxLength(login.edit[2], 100)
 guiSetVisible(login.window[1],false);
 
 
-register.window[1] = guiCreateWindow(sW*0.320, sH*0.384, 243, 237, "Register your account.", false)
+register.window[1] = guiCreateWindow(sW*0.320, sH*0.384, 243, 237, "Registre sua conta.", false)
 guiWindowSetMovable(register.window[1], false)
 guiWindowSetSizable(register.window[1], false)
 
-register.label[1] = guiCreateLabel(16, 25, 211, 15, "Username:", false, register.window[1])
+register.label[1] = guiCreateLabel(16, 25, 211, 15, "Usuário:", false, register.window[1])
 register.edit[1] = guiCreateEdit(10, 40, 224, 24, "", false, register.window[1])
 register.label[2] = guiCreateLabel(16, 68, 211, 15, "E-Mail:", false, register.window[1])
 register.edit[2] = guiCreateEdit(9, 83, 224, 24, "", false, register.window[1])
 guiEditSetMaxLength(register.edit[2], 100)
-register.label[3] = guiCreateLabel(16, 110, 211, 15, "Password:", false, register.window[1])
+register.label[3] = guiCreateLabel(16, 110, 211, 15, "Senha:", false, register.window[1])
 register.edit[3] = guiCreateEdit(10, 125, 224, 24, "", false, register.window[1])
 guiEditSetMasked(register.edit[3], true)
 guiEditSetMaxLength(register.edit[3], 100)
-register.label[4] = guiCreateLabel(16, 153, 211, 15, "Password 2x:", false, register.window[1])
+register.label[4] = guiCreateLabel(16, 153, 211, 15, "Confirme a Senha:", false, register.window[1])
 register.edit[4] = guiCreateEdit(10, 168, 224, 24, "", false, register.window[1])
 guiEditSetMasked(register.edit[4], true)
 guiEditSetMaxLength(register.edit[4], 100)
-register.button[1] = guiCreateButton(10, 198, 107, 29, "Register", false, register.window[1])
-register.button[2] = guiCreateButton(127, 198, 107, 29, "> back?", false, register.window[1])
+register.button[1] = guiCreateButton(10, 198, 107, 29, "Registrar", false, register.window[1])
+register.button[2] = guiCreateButton(127, 198, 107, 29, "> voltar?", false, register.window[1])
 
 guiSetVisible(register.window[1],false);
 
@@ -69,13 +69,13 @@ guiSetFont(logedin.label[4], "default-bold-small")
 
 guiSetVisible(logedin.window[2],false);]]
 
-language.window[1] = guiCreateWindow(0, 0, 243, 75, "Choose Language", false)
+language.window[1] = guiCreateWindow(0, 0, 243, 75, "Escolha o Idioma", false)
 language.staticimage[1] = guiCreateStaticImage(0, 0, 243, 152, "empty.png", false)
 language.staticimage[2] = guiCreateStaticImage(15, 25, 140, 140, "logo.png", false)
 guiSetProperty(language.staticimage[1], "AlwaysOnTop", "True");
 --guiWindowSetSizable(language.window[1], false)
 
-language.label[1] = guiCreateLabel(16, 25, 211, 15, "Language:", false, language.staticimage[1])
+language.label[1] = guiCreateLabel(16, 25, 211, 15, "Idioma:", false, language.staticimage[1])
 guiSetFont(language.label[1], "default-bold-small")
 language.combobox[1] = guiCreateComboBox(10, 40, 223, 102, "", false, language.staticimage[1])
 
@@ -83,6 +83,7 @@ local languages = {
     en = "English",
     lv = "Latviešu",
     ru = "Русский",
+    pt = "Português (BR)",
 }
 
 addEventHandler("onClientResourceStart",resourceRoot,function()
@@ -182,7 +183,7 @@ function clientSubmitLogin()
     if (username ~= "" and password ~= "") then
         triggerServerEvent("submitLogin",localPlayer,localPlayer,username,password,getLang(langid))
     else
-        seterror("Fields are empty!")
+        seterror("Os campos estão vazios!")
     end
 end
 
@@ -195,7 +196,7 @@ function clientSubmitRegister()
     if (string.len(username) >= 5 and string.len(email) >= 5 and string.find(email,"@") and string.len(password) >= 5 and password == password2) then
         triggerServerEvent("submitRegister",localPlayer,localPlayer,username,password,email,getLang(langid))
     else
-        seterror("Username or password too short.")
+        seterror("Usuário ou senha muito curtos.")
     end
 end
 
@@ -218,7 +219,7 @@ addEventHandler("loginSuccess",root,loginSuccess)
 function lowScreenWarn()
     local x,y = guiGetScreenSize();
     if (x < 1024) and (y < 768) then
-        outputChatBox("WARNING: YOUR SCREEN RESOLUTION IS TOO LOW, SOME GUI PLACEMENT MAY BE WRONGLY POSITIONED!",200,10,10);
+        outputChatBox("AVISO: SUA RESOLUÇÃO DE TELA É MUITO BAIXA, ALGUNS ELEMENTOS DA INTERFACE PODEM ESTAR POSICIONADOS INCORRETAMENTE!",200,10,10);
     end
 end
 addEvent("lowScreenWarn",true)
