@@ -14,15 +14,16 @@
 
 1. [Sobre](#-sobre)
 2. [Características](#-características)
-3. [Instalação Rápida](#-instalação-rápida)
-4. [Instalação Detalhada](#-instalação-detalhada)
-5. [Estrutura do Projeto](#-estrutura-do-projeto)
-6. [Sistemas Principais](#-sistemas-principais)
-7. [Comandos e Atalhos](#-comandos-e-atalhos)
-8. [Solução de Problemas](#-solução-de-problemas)
-9. [Configurações Avançadas](#-configurações-avançadas)
-10. [Contribuindo](#-contribuindo)
-11. [Licença](#-licença)
+3. [Instalação Rápida (Windows)](#-instalação-rápida-windows)
+4. [Instalação Detalhada (Windows)](#-instalação-detalhada-windows)
+5. [Instalação Linux](#-instalação-linux)
+6. [Estrutura do Projeto](#-estrutura-do-projeto)
+7. [Sistemas Principais](#-sistemas-principais)
+8. [Comandos e Atalhos](#-comandos-e-atalhos)
+9. [Solução de Problemas](#-solução-de-problemas)
+10. [Configurações Avançadas](#-configurações-avançadas)
+11. [Contribuindo](#-contribuindo)
+12. [Licença](#-licença)
 
 ---
 
@@ -63,35 +64,141 @@ O **MTA DayZ** é um modo de jogo completo de sobrevivência pós-apocalíptica 
 
 ---
 
-## 🚀 Instalação Rápida
+## 🚀 Instalação Rápida (Windows)
 
-### Passo 1: Baixar
+### Passo 1: Baixar o MTA Server
 
-```bash
-git clone https://github.com/TioMalandrex/mta-dayz.git
-```
+1. Acesse [multitheftauto.com](https://multitheftauto.com/)
+2. Baixe o **MTA:SA Server** para Windows
+3. Execute o instalador e siga as instruções
+4. Anote o caminho de instalação (exemplo: `C:\Program Files\MTA San Andreas 1.5\server\`)
 
-### Passo 2: Copiar Recursos
+### Passo 2: Baixar o Gamemode
 
-Copie todos os recursos para a pasta `resources` do seu servidor MTA:
-```
-/mta-server/mods/deathmatch/resources/
-```
+1. Baixe este repositório como ZIP: [Download ZIP](https://github.com/TioMalandrex/mta-dayz/archive/refs/heads/main.zip)
+2. Extraia todos os arquivos
+3. Copie todas as pastas do gamemode para:
+   ```
+   C:\Program Files\MTA San Andreas 1.5\server\mods\deathmatch\resources\
+   ```
 
-### Passo 3: Configurar ACL
+### Passo 3: Configurar Recursos
 
-Adicione ao arquivo `acl.xml`:
+1. Abra o arquivo `mtaserver.conf` localizado em:
+   ```
+   C:\Program Files\MTA San Andreas 1.5\server\mods\deathmatch\
+   ```
+
+2. Adicione estas linhas dentro da tag `<config>`:
+   ```xml
+   <resource src="dayzepoch" startup="1" protected="0" />
+   <resource src="e_login" startup="1" protected="0" />
+   <resource src="dayzmap" startup="1" protected="0" />
+   <resource src="e_admin" startup="1" protected="0" />
+   <resource src="e_scoreboard" startup="1" protected="0" />
+   <resource src="e_downloader" startup="1" protected="0" />
+   <resource src="e_shop" startup="1" protected="0" />
+   <resource src="e_gps" startup="1" protected="0" />
+   <resource src="e_textures" startup="1" protected="0" />
+   <resource src="e_map" startup="1" protected="0" />
+   <resource src="e_radar" startup="1" protected="0" />
+   <resource src="e_dynamicsky" startup="1" protected="0" />
+   <resource src="particles" startup="1" protected="0" />
+   <resource src="noglitch" startup="1" protected="0" />
+   ```
+
+### Passo 4: Configurar Permissões (ACL)
+
+1. Abra o arquivo `acl.xml` no mesmo diretório
+2. Localize o grupo `<group name="Admin">` e adicione dentro dele:
+   ```xml
+   <object name="resource.dayzepoch"></object>
+   <object name="resource.e_login"></object>
+   ```
+
+### Passo 5: Iniciar o Servidor
+
+1. Vá até a pasta do servidor
+2. Execute `MTA Server.exe`
+3. Aguarde até ver a mensagem "Server started and is ready to accept connections!"
+
+**Pronto!** Seu servidor DayZ está funcionando. Conecte usando `localhost:22003`
+
+> **💡 Dica**: Para Linux, veja a seção [Instalação Linux](#instalação-linux) no final do documento.
+
+---
+
+## 📋 Instalação Detalhada (Windows)
+
+### Requisitos do Sistema
+
+**Hardware Mínimo:**
+- Processador: Dual-core 2.0 GHz
+- RAM: 2 GB
+- Espaço: 1 GB livre
+- Internet: 10 Mbps upload
+- Windows 7 ou superior
+
+**Hardware Recomendado:**
+- Processador: Quad-core 3.0+ GHz
+- RAM: 4+ GB
+- Espaço: 2+ GB (SSD recomendado)
+- Internet: 50+ Mbps upload
+- Windows Server 2016+ ou Windows 10/11
+
+**Software Necessário:**
+- MTA:SA Server 1.5.x ou superior
+- Visual C++ Redistributable 2015-2022 ([Download aqui](https://aka.ms/vs/17/release/vc_redist.x64.exe))
+
+### Passo a Passo Completo
+
+#### 1. Instalar o MTA Server
+
+1. Acesse [https://multitheftauto.com/](https://multitheftauto.com/)
+2. Clique em **"Download MTA:SA Server"**
+3. Baixe a versão Windows
+4. Execute o instalador `mtasa-server-1.x.x.exe`
+5. Durante a instalação:
+   - Escolha o caminho (recomendado: `C:\MTA-Server\`)
+   - Marque "Create desktop shortcut" se desejar
+   - Clique em "Install"
+6. Aguarde a conclusão da instalação
+
+#### 2. Preparar o Gamemode DayZ
+
+1. **Baixar o gamemode:**
+   - Opção A: Baixe o ZIP: [https://github.com/TioMalandrex/mta-dayz/archive/refs/heads/main.zip](https://github.com/TioMalandrex/mta-dayz/archive/refs/heads/main.zip)
+   - Opção B: Se tiver Git instalado: `git clone https://github.com/TioMalandrex/mta-dayz.git`
+
+2. **Extrair os arquivos:**
+   - Extraia o conteúdo do ZIP para uma pasta temporária
+   - Você verá várias pastas: `dayzepoch`, `e_admin`, `e_login`, etc.
+
+3. **Copiar para o servidor:**
+   - Abra a pasta do MTA Server: `C:\MTA-Server\mods\deathmatch\resources\`
+   - Copie TODAS as pastas do gamemode para esta pasta
+   - Resultado esperado: você deve ver pastas como `C:\MTA-Server\mods\deathmatch\resources\dayzepoch\`
+
+#### 3. Configurar o Servidor
+
+**A. Editar mtaserver.conf:**
+
+1. Abra o arquivo: `C:\MTA-Server\mods\deathmatch\mtaserver.conf`
+2. Use o Bloco de Notas ou Notepad++
+3. Localize a seção `<config>` (geralmente no início do arquivo)
+4. Adicione estas configurações dentro de `<config>`:
+
 ```xml
-<group name="Admin">
-    <object name="resource.dayzepoch"></object>
-    <object name="resource.e_login"></object>
-</group>
-```
+<!-- Nome do seu servidor -->
+<servername>Meu Servidor DayZ</servername>
 
-### Passo 4: Configurar mtaserver.conf
+<!-- Porta do servidor (padrão: 22003) -->
+<serverport>22003</serverport>
 
-Adicione ao arquivo `mtaserver.conf`:
-```xml
+<!-- Número máximo de jogadores -->
+<maxplayers>32</maxplayers>
+
+<!-- Recursos do DayZ (IMPORTANTE!) -->
 <resource src="dayzepoch" startup="1" protected="0" />
 <resource src="e_login" startup="1" protected="0" />
 <resource src="dayzmap" startup="1" protected="0" />
@@ -108,63 +215,104 @@ Adicione ao arquivo `mtaserver.conf`:
 <resource src="noglitch" startup="1" protected="0" />
 ```
 
-### Passo 5: Iniciar Servidor
+5. Salve o arquivo
 
-**Windows:**
-```cmd
-mta-server.exe
+**B. Configurar Permissões (ACL):**
+
+1. Abra o arquivo: `C:\MTA-Server\mods\deathmatch\acl.xml`
+2. Localize `<group name="Admin">`
+3. Adicione estas linhas dentro do grupo Admin:
+
+```xml
+<object name="resource.dayzepoch"></object>
+<object name="resource.e_login"></object>
 ```
 
-**Linux:**
-```bash
-./mta-server64
+4. Para se tornar admin, adicione também:
+```xml
+<object name="user.SeuNomeNoJogo"></object>
 ```
+   (Substitua "SeuNomeNoJogo" pelo seu nome de usuário MTA)
 
-**Pronto!** O servidor está rodando.
+5. Salve o arquivo
+
+#### 4. Iniciar o Servidor
+
+1. Vá para a pasta: `C:\MTA-Server\`
+2. Execute `MTA Server.exe` (duplo clique)
+3. Uma janela de console abrirá
+4. Aguarde as mensagens:
+   ```
+   [INFO] Resource 'dayzepoch' started
+   [INFO] Resource 'e_login' started
+   ...
+   [INFO] Server started and is ready to accept connections!
+   ```
+
+Se ver mensagens de erro, verifique:
+- Se todos os recursos foram copiados corretamente
+- Se o `mtaserver.conf` está configurado corretamente
+- Se não há erros de digitação nos nomes dos recursos
+
+#### 5. Conectar ao Servidor
+
+**No seu computador (ou de outro computador na rede):**
+
+1. Abra o **MTA:SA Client** (o jogo)
+2. Clique em **"Quick Connect"**
+3. Em "Host", digite:
+   - Se for no mesmo PC: `localhost`
+   - Se for de outro PC: `SEU_IP` (exemplo: `192.168.1.100`)
+4. Em "Port", deixe: `22003`
+5. Clique em **"Connect"**
+6. Na primeira vez, você verá a tela de registro
+7. Crie sua conta e faça login
+
+**Pronto!** Você está no servidor DayZ! 🎮
+
+#### 6. Configurar Firewall (Se necessário)
+
+Se outros jogadores não conseguirem conectar:
+
+1. Abra o **Painel de Controle**
+2. Vá em **Sistema e Segurança** → **Firewall do Windows Defender**
+3. Clique em **"Configurações avançadas"**
+4. Clique em **"Regras de Entrada"** → **"Nova Regra..."**
+5. Selecione **"Porta"** → Avançar
+6. Selecione **"TCP e UDP"**
+7. Digite a porta: `22003`
+8. Selecione **"Permitir a conexão"**
+9. Marque todos os perfis (Domínio, Particular, Público)
+10. Dê um nome: `MTA Server`
+11. Clique em **"Concluir"**
+
+### Verificação Final
+
+Use este checklist para confirmar que tudo está funcionando:
+
+- [ ] Servidor inicia sem erros
+- [ ] Console mostra "Server started and is ready to accept connections!"
+- [ ] Todos os recursos aparecem como "started" no console
+- [ ] Consigo conectar usando `localhost:22003`
+- [ ] Tela de login/registro aparece
+- [ ] Consigo criar uma conta e fazer login
+- [ ] O jogo carrega e eu apareço no mapa
+
+Se todos os itens estão marcados, **parabéns!** Seu servidor está funcionando perfeitamente! 🎉
 
 ---
 
-## 📋 Instalação Detalhada
+## 🐧 Instalação Linux
 
-### Requisitos do Sistema
+<details>
+<summary><b>Clique aqui para ver instruções de instalação no Linux</b></summary>
 
-#### Servidor
+### Requisitos
+- Ubuntu 18.04+ ou outra distribuição Linux compatível
+- Acesso root ou sudo
 
-**Hardware Mínimo:**
-- Processador: Dual-core 2.0 GHz
-- RAM: 2 GB
-- Armazenamento: 1 GB livre
-- Internet: 10 Mbps upload
-- SO: Windows Server 2012+ / Linux (Ubuntu 18.04+)
+### Instalação do MTA Server
 
-**Hardware Recomendado:**
-- Processador: Quad-core 3.0+ GHz
-- RAM: 4+ GB
-- Armazenamento: 2+ GB SSD
-- Internet: 50+ Mbps upload
-- SO: Windows Server 2016+ / Linux (Ubuntu 20.04+)
-
-**Software:**
-- MTA:SA Server 1.5.x ou superior
-- Visual C++ Redistributable (Windows)
-
-#### Cliente (Jogadores)
-
-**Requisitos:**
-- GTA San Andreas instalado
-- MTA:SA Client 1.5.x ou superior
-- RAM: 2+ GB
-- Placa de vídeo compatível com DirectX 9
-
-### Instalação do Servidor MTA
-
-**Windows:**
-1. Baixe o MTA:SA Server de [multitheftauto.com](https://multitheftauto.com/)
-2. Execute o instalador
-3. Escolha o diretório de instalação
-4. Complete a instalação
-
-**Linux:**
 ```bash
 # Baixar MTA Server
 wget https://linux.multitheftauto.com/dl/multitheftauto_linux_x64.tar.gz
@@ -175,82 +323,48 @@ tar -xzvf multitheftauto_linux_x64.tar.gz
 # Entrar no diretório
 cd multitheftauto_linux_x64
 
-# Dar permissão
+# Dar permissão de execução
 chmod +x mta-server64
 ```
 
-### Configuração Detalhada do ACL
+### Instalar o Gamemode
 
-Edite `mods/deathmatch/acl.xml`:
+```bash
+# Baixar o gamemode
+git clone https://github.com/TioMalandrex/mta-dayz.git
 
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<acl>
-    <group name="Everyone">
-        <acl name="Default"></acl>
-        <object name="user.*"></object>
-    </group>
-    
-    <group name="Admin">
-        <acl name="Admin"></acl>
-        <acl name="RPC"></acl>
-        
-        <!-- Recursos DayZ -->
-        <object name="resource.dayzepoch"></object>
-        <object name="resource.e_login"></object>
-        
-        <!-- Adicione seu usuário aqui -->
-        <object name="user.SeuNomeDeUsuario"></object>
-    </group>
-    
-    <acl name="Admin">
-        <right name="general.ModifyOtherObjects" access="true"></right>
-        <right name="general.http" access="true"></right>
-        <right name="function.executeCommandHandler" access="true"></right>
-        <right name="command.start" access="true"></right>
-        <right name="command.stop" access="true"></right>
-        <right name="command.ban" access="true"></right>
-        <right name="command.kick" access="true"></right>
-    </acl>
-</acl>
+# Copiar recursos para o servidor
+cp -r mta-dayz/* mods/deathmatch/resources/
 ```
 
-### Configuração Avançada do Servidor
+### Configurar
 
-Edite `mods/deathmatch/mtaserver.conf` para personalizar:
+Edite os arquivos da mesma forma que no Windows:
+- `mods/deathmatch/mtaserver.conf` - adicione os recursos
+- `mods/deathmatch/acl.xml` - configure permissões
 
-```xml
-<config>
-    <!-- Nome do Servidor -->
-    <servername>Meu Servidor DayZ MTA</servername>
-    
-    <!-- Porta (padrão: 22003) -->
-    <serverport>22003</serverport>
-    
-    <!-- Máximo de Jogadores -->
-    <maxplayers>32</maxplayers>
-    
-    <!-- Senha (opcional) -->
-    <password></password>
-    
-    <!-- FPS Limit -->
-    <fpslimit>36</fpslimit>
-    
-    <!-- Recursos DayZ -->
-    <resource src="dayzepoch" startup="1" protected="0" />
-    <resource src="e_login" startup="1" protected="0" />
-    <!-- ... outros recursos ... -->
-</config>
+### Iniciar Servidor
+
+```bash
+# Iniciar diretamente
+./mta-server64
+
+# OU iniciar em segundo plano com screen
+screen -S mta-dayz
+./mta-server64
+# Pressione Ctrl+A, depois D para detach
+# Para retornar: screen -r mta-dayz
 ```
 
-### Conectar ao Servidor
+### Configurar Firewall (UFW)
 
-1. Abra o **MTA:SA Client**
-2. Clique em **Quick Connect**
-3. Digite: `localhost:22003` (se local) ou `SEU_IP:22003`
-4. Clique em **Connect**
-5. Na tela de login, clique em **Registrar**
-6. Preencha seus dados e faça login
+```bash
+sudo ufw allow 22003/tcp
+sudo ufw allow 22003/udp
+sudo ufw reload
+```
+
+</details>
 
 ---
 
