@@ -1,0 +1,615 @@
+# 📥 Guia de Instalação Completo - MTA DayZ Gamemode
+
+## 📋 Requisitos
+
+### Servidor
+- **MTA:SA Server** versão 1.5 ou superior
+- **Sistema Operacional:** Windows ou Linux
+- **RAM:** Mínimo 2GB (recomendado 4GB+)
+- **CPU:** Processador dual-core ou superior
+- **Espaço em Disco:** ~500MB para o gamemode + recursos
+- **Porta do Servidor:** 22003 (padrão MTA, configurável)
+
+### Cliente (Jogadores)
+- **GTA San Andreas** instalado
+- **MTA:SA Client** versão 1.5 ou superior
+- **Sistema Operacional:** Windows, Linux, ou MacOS
+- **RAM:** Mínimo 1GB
+- **Espaço em Disco:** ~100MB para download de recursos
+
+---
+
+## 🚀 Instalação Rápida (Resumida)
+
+### Passo 1: Baixar o Gamemode
+```bash
+git clone https://github.com/TioMalandrex/mta-dayz.git
+```
+
+### Passo 2: Copiar para o Servidor
+Copie todas as pastas para o diretório `resources` do seu servidor MTA:
+```
+/mta-server/mods/deathmatch/resources/
+```
+
+### Passo 3: Configurar ACL
+Adicione ao arquivo `acl.xml`:
+```xml
+<object name="resource.dayzepoch"></object>
+<object name="resource.e_login"></object>
+```
+
+### Passo 4: Configurar mtaserver.conf
+Adicione as seguintes linhas ao arquivo `mtaserver.conf`:
+```xml
+<resource src="dayzepoch" startup="1" protected="0" />
+<resource src="e_login" startup="1" protected="0" />
+<resource src="dayzmap" startup="1" protected="0" />
+<resource src="admin" startup="1" protected="0" />
+<resource src="e_admin" startup="1" protected="0" />
+<resource src="e_scoreboard" startup="1" protected="0" />
+<resource src="e_downloader" startup="1" protected="0" />
+<resource src="e_shop" startup="1" protected="0" />
+<resource src="e_gps" startup="1" protected="0" />
+<resource src="e_textures" startup="1" protected="0" />
+<resource src="e_map" startup="1" protected="0" />
+<resource src="e_radar" startup="1" protected="0" />
+<resource src="e_dynamicsky" startup="1" protected="0" />
+<resource src="particles" startup="1" protected="0" />
+<resource src="noglitch" startup="1" protected="0" />
+```
+
+### Passo 5: Iniciar o Servidor
+```bash
+./mta-server
+```
+
+---
+
+## 📖 Instalação Detalhada
+
+### 1️⃣ Preparação do Servidor
+
+#### 1.1 Instalar MTA:SA Server
+
+**Windows:**
+1. Baixe o MTA:SA Server de [https://multitheftauto.com/](https://multitheftauto.com/)
+2. Execute o instalador
+3. Escolha o diretório de instalação (ex: `C:\MTA-Server\`)
+4. Complete a instalação
+
+**Linux:**
+```bash
+# Baixar MTA Server para Linux
+wget https://linux.multitheftauto.com/dl/multitheftauto_linux_x64.tar.gz
+
+# Extrair
+tar -xzvf multitheftauto_linux_x64.tar.gz
+
+# Entrar no diretório
+cd multitheftauto_linux_x64
+
+# Dar permissão de execução
+chmod +x mta-server64
+```
+
+#### 1.2 Verificar Estrutura de Diretórios
+
+Certifique-se de que seu servidor tem a seguinte estrutura:
+```
+mta-server/
+├── mta-server.exe (ou mta-server64 no Linux)
+├── mods/
+│   └── deathmatch/
+│       ├── resources/
+│       ├── acl.xml
+│       ├── mtaserver.conf
+│       └── ...
+```
+
+---
+
+### 2️⃣ Download e Instalação dos Recursos
+
+#### 2.1 Baixar o Gamemode
+
+**Opção A: Via Git (Recomendado)**
+```bash
+cd /caminho/para/mta-server/mods/deathmatch/resources/
+git clone https://github.com/TioMalandrex/mta-dayz.git
+cd mta-dayz
+```
+
+**Opção B: Download Manual**
+1. Acesse [https://github.com/TioMalandrex/mta-dayz](https://github.com/TioMalandrex/mta-dayz)
+2. Clique em "Code" → "Download ZIP"
+3. Extraia o conteúdo para o diretório `resources`
+
+#### 2.2 Organizar os Recursos
+
+Após baixar, você deve ter as seguintes pastas em `resources/`:
+```
+resources/
+├── dayzepoch/
+├── dayzmap/
+├── e_admin/
+├── e_downloader/
+├── e_dynamicsky/
+├── e_gps/
+├── e_login/
+├── e_map/
+├── e_missions/
+├── e_radar/
+├── e_scoreboard/
+├── e_shop/
+├── e_textures/
+├── noglitch/
+└── particles/
+```
+
+**Verificação:**
+```bash
+# Linux/Mac
+ls -la resources/ | grep -E "(dayzepoch|e_|noglitch|particles)"
+
+# Windows (PowerShell)
+Get-ChildItem resources\ | Where-Object {$_.Name -match "(dayzepoch|e_|noglitch|particles)"}
+```
+
+---
+
+### 3️⃣ Configuração do Servidor
+
+#### 3.1 Configurar ACL (Access Control List)
+
+Abra o arquivo `acl.xml` localizado em:
+```
+mta-server/mods/deathmatch/acl.xml
+```
+
+**Adicione as seguintes linhas** dentro da tag `<acl>`, preferencialmente no grupo **Admin**:
+
+```xml
+<group name="Admin">
+    <!-- Linhas existentes... -->
+    
+    <!-- Adicionar estas linhas: -->
+    <object name="resource.dayzepoch"></object>
+    <object name="resource.e_login"></object>
+    
+    <!-- ACL rights existentes... -->
+    <acl name="Admin">
+        <right name="general.ModifyOtherObjects" access="true"></right>
+        <right name="general.http" access="true"></right>
+        <!-- ... outros direitos ... -->
+    </acl>
+</group>
+```
+
+**Exemplo Completo:**
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<acl>
+    <group name="Everyone">
+        <acl name="Default"></acl>
+        <object name="user.*"></object>
+    </group>
+    
+    <group name="Admin">
+        <acl name="Admin"></acl>
+        <acl name="RPC"></acl>
+        
+        <!-- DayZ Resources -->
+        <object name="resource.dayzepoch"></object>
+        <object name="resource.e_login"></object>
+        
+        <!-- Adicione seu nome de usuário aqui para ser admin -->
+        <object name="user.SeuNomeDeUsuario"></object>
+    </group>
+    
+    <acl name="Default">
+        <right name="general.ModifyOtherObjects" access="false"></right>
+        <right name="general.http" access="false"></right>
+    </acl>
+    
+    <acl name="Admin">
+        <right name="general.ModifyOtherObjects" access="true"></right>
+        <right name="general.http" access="true"></right>
+        <right name="function.executeCommandHandler" access="true"></right>
+        <right name="command.start" access="true"></right>
+        <right name="command.stop" access="true"></right>
+        <right name="command.ban" access="true"></right>
+        <right name="command.kick" access="true"></right>
+        <right name="command.mute" access="true"></right>
+    </acl>
+</acl>
+```
+
+**⚠️ IMPORTANTE:** Substitua `SeuNomeDeUsuario` pelo seu nome de conta no MTA.
+
+#### 3.2 Configurar mtaserver.conf
+
+Abra o arquivo `mtaserver.conf` localizado em:
+```
+mta-server/mods/deathmatch/mtaserver.conf
+```
+
+**Adicione as seguintes linhas** na seção de recursos (após `<config>`):
+
+```xml
+<!-- DayZ Epoch Gamemode -->
+<resource src="dayzepoch" startup="1" protected="0" />
+<resource src="e_login" startup="1" protected="0" />
+<resource src="dayzmap" startup="1" protected="0" />
+<resource src="admin" startup="1" protected="0" />
+<resource src="e_admin" startup="1" protected="0" />
+<resource src="e_scoreboard" startup="1" protected="0" />
+<resource src="e_downloader" startup="1" protected="0" />
+<resource src="e_shop" startup="1" protected="0" />
+<resource src="e_gps" startup="1" protected="0" />
+<resource src="e_textures" startup="1" protected="0" />
+<resource src="e_map" startup="1" protected="0" />
+<resource src="e_radar" startup="1" protected="0" />
+<resource src="e_dynamicsky" startup="1" protected="0" />
+<resource src="particles" startup="1" protected="0" />
+<resource src="noglitch" startup="1" protected="0" />
+```
+
+**Configurações Adicionais Recomendadas:**
+
+```xml
+<config>
+    <!-- Nome do Servidor -->
+    <servername>Meu Servidor DayZ MTA</servername>
+    
+    <!-- Porta do Servidor (padrão: 22003) -->
+    <serverport>22003</serverport>
+    
+    <!-- Máximo de Jogadores -->
+    <maxplayers>32</maxplayers>
+    
+    <!-- Senha do Servidor (opcional) -->
+    <password></password>
+    
+    <!-- FPS Limit -->
+    <fpslimit>36</fpslimit>
+    
+    <!-- Voice (recomendado: 0 para DayZ) -->
+    <voice>0</voice>
+    
+    <!-- Bandwidth Reduction Mode -->
+    <bandwidth_reduction>medium</bandwidth_reduction>
+    
+    <!-- DayZ Resources -->
+    <resource src="dayzepoch" startup="1" protected="0" />
+    <resource src="e_login" startup="1" protected="0" />
+    <resource src="dayzmap" startup="1" protected="0" />
+    <resource src="admin" startup="1" protected="0" />
+    <resource src="e_admin" startup="1" protected="0" />
+    <resource src="e_scoreboard" startup="1" protected="0" />
+    <resource src="e_downloader" startup="1" protected="0" />
+    <resource src="e_shop" startup="1" protected="0" />
+    <resource src="e_gps" startup="1" protected="0" />
+    <resource src="e_textures" startup="1" protected="0" />
+    <resource src="e_map" startup="1" protected="0" />
+    <resource src="e_radar" startup="1" protected="0" />
+    <resource src="e_dynamicsky" startup="1" protected="0" />
+    <resource src="particles" startup="1" protected="0" />
+    <resource src="noglitch" startup="1" protected="0" />
+</config>
+```
+
+---
+
+### 4️⃣ Iniciar o Servidor
+
+#### Windows:
+1. Navegue até o diretório do servidor
+2. Execute `mta-server.exe`
+3. Aguarde o carregamento dos recursos
+
+#### Linux:
+```bash
+cd /caminho/para/mta-server/
+./mta-server64
+```
+
+**Ou execute em background:**
+```bash
+screen -S mta-dayz
+./mta-server64
+# Pressione Ctrl+A, depois D para detach
+# Para retornar: screen -r mta-dayz
+```
+
+#### Verificar se Iniciou Corretamente:
+
+No console do servidor, você deve ver:
+```
+[INFO] Resource 'dayzepoch' started
+[INFO] Resource 'e_login' started
+[INFO] Resource 'dayzmap' started
+[INFO] Resource 'e_admin' started
+[INFO] Resource 'e_scoreboard' started
+...
+```
+
+Se houver erros, verifique:
+1. Nomes dos recursos estão corretos
+2. Arquivos `meta.xml` existem em cada recurso
+3. Permissões ACL estão configuradas
+
+---
+
+### 5️⃣ Conectar ao Servidor
+
+#### 5.1 Via Cliente MTA
+
+1. Abra **MTA:SA Client**
+2. Clique em **Quick Connect** (ou Browse Servers)
+3. Digite o IP do servidor: `localhost:22003` (se local) ou `IP_DO_SERVIDOR:22003`
+4. Clique em **Connect**
+
+#### 5.2 Via Browser de Servidores
+
+1. Abra **MTA:SA Client**
+2. Vá para **Browse Servers**
+3. Na busca, digite o nome do seu servidor
+4. Duplo-clique para conectar
+
+#### 5.3 Criar Conta
+
+Ao conectar pela primeira vez:
+1. Clique em **Register** (Registrar)
+2. Preencha:
+   - **Username** (Nome de usuário)
+   - **Password** (Senha)
+   - **Email** (opcional)
+3. Selecione o **idioma**
+4. Clique em **Register**
+5. Faça login com suas credenciais
+
+---
+
+## 🔧 Configurações Opcionais
+
+### Configurar Admin
+
+Para dar permissões de admin a um jogador:
+
+**Método 1: Via ACL (Recomendado)**
+1. Abra `acl.xml`
+2. Adicione na seção Admin:
+```xml
+<group name="Admin">
+    <object name="user.NomeDoJogador"></object>
+</group>
+```
+
+**Método 2: Via Console do Servidor**
+```
+aclrequest allow user.NomeDoJogador Admin
+```
+
+**Método 3: Via Admin Resource**
+Se tiver o resource `admin` instalado:
+```
+/addaccount NomeDoJogador SenhaDoJogador
+/aclrequest allow user.NomeDoJogador Admin
+```
+
+### Configurar Porta do Servidor
+
+Se a porta 22003 estiver em uso:
+
+1. Abra `mtaserver.conf`
+2. Altere a linha:
+```xml
+<serverport>22005</serverport>
+```
+
+3. **Abra a porta no Firewall:**
+
+**Windows:**
+```cmd
+netsh advfirewall firewall add rule name="MTA Server" dir=in action=allow protocol=UDP localport=22005
+netsh advfirewall firewall add rule name="MTA Server" dir=in action=allow protocol=TCP localport=22005
+```
+
+**Linux (UFW):**
+```bash
+sudo ufw allow 22005/tcp
+sudo ufw allow 22005/udp
+```
+
+**Linux (iptables):**
+```bash
+sudo iptables -A INPUT -p tcp --dport 22005 -j ACCEPT
+sudo iptables -A INPUT -p udp --dport 22005 -j ACCEPT
+```
+
+### Ajustar Performance
+
+Para servidores com muitos jogadores, edite `mtaserver.conf`:
+
+```xml
+<!-- Aumentar FPS Limit -->
+<fpslimit>60</fpslimit>
+
+<!-- Redução de Banda -->
+<bandwidth_reduction>medium</bandwidth_reduction>
+
+<!-- Lightweight Sync -->
+<lightweight_sync_enabled>1</lightweight_sync_enabled>
+```
+
+---
+
+## 🐛 Solução de Problemas
+
+### Problema: Recursos não iniciam
+
+**Erro:** `ERROR: Unable to start resource 'dayzepoch'`
+
+**Soluções:**
+1. Verifique se o arquivo `meta.xml` existe no recurso
+2. Verifique permissões de arquivos (Linux):
+   ```bash
+   chmod -R 755 resources/dayzepoch/
+   ```
+3. Verifique se todos os arquivos foram copiados corretamente
+4. Reinicie o servidor
+
+### Problema: Não consigo fazer login
+
+**Erro:** Tela de login não aparece ou erro ao registrar
+
+**Soluções:**
+1. Verifique se `e_login` está iniciado:
+   ```
+   list
+   ```
+2. Reinicie o recurso:
+   ```
+   restart e_login
+   ```
+3. Verifique ACL:
+   ```xml
+   <object name="resource.e_login"></object>
+   ```
+
+### Problema: Admin não funciona
+
+**Erro:** Tecla O não abre painel de admin
+
+**Soluções:**
+1. Verifique se você está no grupo Admin no `acl.xml`
+2. Reinicie o servidor após alterar ACL
+3. Verifique se `e_admin` está iniciado
+4. Use comando no console do servidor:
+   ```
+   aclrequest allow user.SeuNome Admin
+   ```
+
+### Problema: Zumbis não spawnam
+
+**Soluções:**
+1. Verifique se `dayzepoch` está iniciado
+2. Aguarde alguns minutos (spawn é gradual)
+3. Mova-se pelo mapa (zumbis spawnam perto de jogadores)
+4. Verifique console do servidor por erros
+
+### Problema: Loot não aparece
+
+**Soluções:**
+1. Verifique se `dayzepoch` está iniciado
+2. Aguarde o respawn de loot (timer configurado)
+3. Procure em áreas diferentes (algumas áreas têm menos loot)
+4. Reinicie o recurso: `restart dayzepoch`
+
+### Problema: Veículos não funcionam
+
+**Soluções:**
+1. Pressione **K** para ligar o motor
+2. Verifique combustível (F para visualizar)
+3. Verifique se o veículo tem todas as peças
+4. Repare com Toolbox se necessário
+
+### Problema: Servidor trava ou lag
+
+**Soluções:**
+1. Aumente RAM alocada para o servidor
+2. Ajuste `fpslimit` para valor menor (30-36)
+3. Habilite `bandwidth_reduction`:
+   ```xml
+   <bandwidth_reduction>maximum</bandwidth_reduction>
+   ```
+4. Limite número de jogadores:
+   ```xml
+   <maxplayers>16</maxplayers>
+   ```
+
+---
+
+## 📊 Verificação Pós-Instalação
+
+Use esta checklist para verificar se tudo está funcionando:
+
+- [ ] Servidor inicia sem erros
+- [ ] Todos os 15 recursos estão iniciados (use comando `list`)
+- [ ] Consigo conectar ao servidor
+- [ ] Tela de login aparece
+- [ ] Consigo registrar uma conta
+- [ ] Consigo fazer login
+- [ ] Spawno no jogo
+- [ ] HUD aparece (sangue, fome, sede)
+- [ ] Inventário abre (tecla J)
+- [ ] Encontro loot pelo mapa
+- [ ] Zumbis spawnam
+- [ ] Posso atacar zumbis
+- [ ] Sistema de fome/sede funciona
+- [ ] Consigo entrar em veículos
+- [ ] Admin panel funciona (tecla O) [se admin]
+
+---
+
+## 🔄 Atualizações
+
+Para atualizar o gamemode:
+
+**Via Git:**
+```bash
+cd resources/mta-dayz/
+git pull origin main
+```
+
+**Manual:**
+1. Baixe a versão mais recente
+2. Faça backup dos arquivos atuais
+3. Substitua os arquivos
+4. Reinicie o servidor
+
+---
+
+## 💾 Backup
+
+**Backup Essencial:**
+```bash
+# Linux/Mac
+cp acl.xml acl.xml.backup
+cp mtaserver.conf mtaserver.conf.backup
+cp -r resources/dayzepoch resources/dayzepoch.backup
+
+# Windows (PowerShell)
+Copy-Item acl.xml acl.xml.backup
+Copy-Item mtaserver.conf mtaserver.conf.backup
+Copy-Item resources\dayzepoch resources\dayzepoch.backup -Recurse
+```
+
+**Backup Completo:**
+```bash
+# Linux/Mac
+tar -czvf backup-$(date +%Y%m%d).tar.gz mods/deathmatch/
+
+# Windows (PowerShell)
+Compress-Archive -Path mods\deathmatch\* -DestinationPath backup-$(Get-Date -Format 'yyyyMMdd').zip
+```
+
+---
+
+## 🎉 Conclusão
+
+Após seguir todos os passos, seu servidor DayZ MTA deve estar funcionando perfeitamente!
+
+**Próximos Passos:**
+1. Convide jogadores para testar
+2. Configure admins conforme necessário
+3. Ajuste configurações de gameplay (loot, zumbis, etc.)
+4. Personalize o servidor (nome, mensagens, etc.)
+5. Monitore performance e faça ajustes
+
+**Suporte:**
+- GitHub Issues: [https://github.com/TioMalandrex/mta-dayz/issues](https://github.com/TioMalandrex/mta-dayz/issues)
+- Documentação MTA: [https://wiki.multitheftauto.com/](https://wiki.multitheftauto.com/)
+
+**Bom jogo! 🎮🧟‍♂️**
