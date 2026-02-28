@@ -6,17 +6,17 @@ function weatherGui()
 
 	guiSetVisible(weatherWindow,false)
 
-	kwLabel = guiCreateLabel(10, 7, 194, 15, "CHANGE WEATHER", false, weatherWindow)
+	kwLabel = guiCreateLabel(10, 7, 194, 15, "MUDAR CLIMA", false, weatherWindow)
 	guiSetFont(kwLabel, "default-bold-small")
 	guiLabelSetHorizontalAlign(kwLabel, "center", false)
-	weatherButtonChange = guiCreateButton(10, 52, 88, 25, "change", false, weatherWindow)
+	weatherButtonChange = guiCreateButton(10, 52, 88, 25, "alterar", false, weatherWindow)
 
 	radioButtonNormal = guiCreateRadioButton(10, 27, 56, 15, "Normal", false, weatherWindow)
-	radioButtonSandstorm = guiCreateRadioButton(76, 27, 77, 15, "Sandstorm", false, weatherWindow)
-	radioButtonRain = guiCreateRadioButton(163, 27, 41, 15, "Rain", false, weatherWindow)
+	radioButtonSandstorm = guiCreateRadioButton(76, 27, 77, 15, "Tempestade de Areia", false, weatherWindow)
+	radioButtonRain = guiCreateRadioButton(163, 27, 41, 15, "Chuva", false, weatherWindow)
 	guiRadioButtonSetSelected(radioButtonNormal, true)
 
-	weatherButtonClose = guiCreateButton(116, 52, 88, 25, "close", false, weatherWindow)
+	weatherButtonClose = guiCreateButton(116, 52, 88, 25, "fechar", false, weatherWindow)
 	addEventHandler("onClientGUIClick",buttonChangeWeather,openWeatherGui,false)
 	addEventHandler("onClientGUIClick",weatherButtonClose,closeWeatherGui,false)
 	addEventHandler("onClientGUIClick",weatherButtonChange,changeWeather,false)

@@ -6,12 +6,12 @@ function errorGui()
 
 	guiSetVisible(errorWindow,false)
 
-	errorWindowError = guiCreateLabel(10, 10, 201, 17, "ERROR - No Player Selected", false, errorWindow)
+	errorWindowError = guiCreateLabel(10, 10, 201, 17, "ERRO - Nenhum Jogador Selecionado", false, errorWindow)
 	guiSetFont(errorWindowError, "default-bold-small")
 	guiLabelSetHorizontalAlign(errorWindowError, "center", false)
 	guiLabelSetVerticalAlign(errorWindowError, "center")
 
-	errorButtonClose = guiCreateButton(78, 37, 67, 17, "close", false, errorWindow)
+	errorButtonClose = guiCreateButton(78, 37, 67, 17, "fechar", false, errorWindow)
 	addEventHandler("onClientGUIClick",errorButtonClose,disableError,false)
 end
 addEventHandler("onClientResourceStart", resourceRoot, errorGui)

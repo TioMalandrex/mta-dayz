@@ -28,8 +28,8 @@ addEventHandler("onClientRender",root,function()
 		end
 	end
 	if (fade >= 1) then
-		dxDrawText("New mission has been spawned, check your map for locations!", w/2+1, h/3+1, w/2+1, h/3+1,tocolor(0,0,0,fade),1.09,"default-bold","center","center",false,false,true)
-		dxDrawText("New mission has been spawned, check your map for locations!", w/2, h/3, w/2, h/3,tocolor(255,255,255,fade),1.09,"default-bold","center","center",false,false,true)
+		dxDrawText("Nova missão foi criada, verifique seu mapa para os locais!", w/2+1, h/3+1, w/2+1, h/3+1,tocolor(0,0,0,fade),1.09,"default-bold","center","center",false,false,true)
+		dxDrawText("Nova missão foi criada, verifique seu mapa para os locais!", w/2, h/3, w/2, h/3,tocolor(255,255,255,fade),1.09,"default-bold","center","center",false,false,true)
 	end
 end);
 
