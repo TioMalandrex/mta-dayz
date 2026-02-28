@@ -63,7 +63,7 @@ function loadXML()
     if not xml then
         xml = xmlCreateFile("dayzsettings.xml","settings");
         xmlNodeSetAttribute(xml,"username","");
-        xmlNodeSetAttribute(xml,"language","en");
+        xmlNodeSetAttribute(xml,"language","pt");
         xmlNodeSetAttribute(xml,"crosshair",1);
         xmlNodeSetAttribute(xml,"weaponhud",1);
         xmlNodeSetAttribute(xml,"debugmonitor",1);
@@ -104,7 +104,7 @@ function loadXML()
 end
 
 function settings_gui()
-    ucp.window[1] = guiCreateWindow((sW - 329) / 2, (sH - 291) / 2, 329, 291, "User Control Panel", false)
+    ucp.window[1] = guiCreateWindow((sW - 329) / 2, (sH - 291) / 2, 329, 291, "Painel de Controle do Usuário", false)
     guiWindowSetSizable(ucp.window[1], false)
     guiSetVisible(ucp.window[1],false)
 
@@ -112,9 +112,9 @@ function settings_gui()
 
     ucp.tabpanel[1] = guiCreateTabPanel(10, 27, 309, 254, false, ucp.window[1])
 
-    ucp.tab[1] = guiCreateTab("Settings", ucp.tabpanel[1])
+    ucp.tab[1] = guiCreateTab("Configurações", ucp.tabpanel[1])
 
-    ucp.label[1] = guiCreateLabel(10, 10, 285, 15, "Crosshair:", false, ucp.tab[1])
+    ucp.label[1] = guiCreateLabel(10, 10, 285, 15, "Mira:", false, ucp.tab[1])
     guiSetFont(ucp.label[1], "default-bold-small")
     ucp.staticimage[1] = guiCreateStaticImage(10, 35, 49, 49, "crosshairs/1.png", false, ucp.tab[1])
     ucp.staticimage[2] = guiCreateStaticImage(69, 35, 49, 49, "crosshairs/2.png", false, ucp.tab[1])
@@ -130,57 +130,57 @@ function settings_gui()
         guiSetAlpha(ucp.staticimage[i],0.025);
     end
 
-    ucp.label[2] = guiCreateLabel(10, 94, 285, 15, "Hud:", false, ucp.tab[1])
+    ucp.label[2] = guiCreateLabel(10, 94, 285, 15, "HUD:", false, ucp.tab[1])
     guiSetFont(ucp.label[2], "default-bold-small")
-    ucp.checkbox[1] = guiCreateCheckBox(10, 119, 135, 15, "Weapon Hud", false, false, ucp.tab[1])
-    ucp.checkbox[2] = guiCreateCheckBox(10, 144, 135, 15, "Debug Monitor", false, false, ucp.tab[1])
-    ucp.checkbox[3] = guiCreateCheckBox(160, 119, 135, 15, "Show FPS", false, false, ucp.tab[1])
-    ucp.checkbox[4] = guiCreateCheckBox(160, 144, 135, 15, "Look Behind", false, false, ucp.tab[1])
-    ucp.label[3] = guiCreateLabel(10, 169, 285, 15, "Server Theme:", false, ucp.tab[1])
+    ucp.checkbox[1] = guiCreateCheckBox(10, 119, 135, 15, "HUD de Arma", false, false, ucp.tab[1])
+    ucp.checkbox[2] = guiCreateCheckBox(10, 144, 135, 15, "Monitor de Debug", false, false, ucp.tab[1])
+    ucp.checkbox[3] = guiCreateCheckBox(160, 119, 135, 15, "Mostrar FPS", false, false, ucp.tab[1])
+    ucp.checkbox[4] = guiCreateCheckBox(160, 144, 135, 15, "Olhar para Trás", false, false, ucp.tab[1])
+    ucp.label[3] = guiCreateLabel(10, 169, 285, 15, "Tema do Servidor:", false, ucp.tab[1])
     guiSetFont(ucp.label[3], "default-bold-small")
-    ucp.radiobutton[1] = guiCreateRadioButton(10, 194, 92, 15, "Brown", false, ucp.tab[1])
-    ucp.radiobutton[2] = guiCreateRadioButton(112, 194, 92, 15, "Blue", false, ucp.tab[1])
-    ucp.radiobutton[3] = guiCreateRadioButton(213, 194, 82, 15, "Green", false, ucp.tab[1])
+    ucp.radiobutton[1] = guiCreateRadioButton(10, 194, 92, 15, "Marrom", false, ucp.tab[1])
+    ucp.radiobutton[2] = guiCreateRadioButton(112, 194, 92, 15, "Azul", false, ucp.tab[1])
+    ucp.radiobutton[3] = guiCreateRadioButton(213, 194, 82, 15, "Verde", false, ucp.tab[1])
 
-    ucp.tab[2] = guiCreateTab("Statistics", ucp.tabpanel[1])
+    ucp.tab[2] = guiCreateTab("Estatísticas", ucp.tabpanel[1])
 
-    ucp.label[4] = guiCreateLabel(10, 10, 289, 15, "Character:", false, ucp.tab[2])
+    ucp.label[4] = guiCreateLabel(10, 10, 289, 15, "Personagem:", false, ucp.tab[2])
     guiSetFont(ucp.label[4], "default-bold-small")
-    ucp.label[5] = guiCreateLabel(10, 35, 289, 15, "Total zombies killed: N/A", false, ucp.tab[2])
-    ucp.label[6] = guiCreateLabel(10, 60, 289, 15, "Total headshots: N/A", false, ucp.tab[2])
-    ucp.label[7] = guiCreateLabel(10, 85, 289, 15, "Total bandits killed: N/A", false, ucp.tab[2])
-    ucp.label[8] = guiCreateLabel(10, 110, 289, 15, "Total bullets shot: N/A", false, ucp.tab[2])
-    ucp.label[9] = guiCreateLabel(10, 135, 289, 15, "Total deaths: N/A", false, ucp.tab[2])
-    ucp.label[10] = guiCreateLabel(10, 160, 289, 15, "Account:", false, ucp.tab[2])
+    ucp.label[5] = guiCreateLabel(10, 35, 289, 15, "Total de zumbis mortos: N/A", false, ucp.tab[2])
+    ucp.label[6] = guiCreateLabel(10, 60, 289, 15, "Total de tiros na cabeça: N/A", false, ucp.tab[2])
+    ucp.label[7] = guiCreateLabel(10, 85, 289, 15, "Total de bandidos mortos: N/A", false, ucp.tab[2])
+    ucp.label[8] = guiCreateLabel(10, 110, 289, 15, "Total de balas disparadas: N/A", false, ucp.tab[2])
+    ucp.label[9] = guiCreateLabel(10, 135, 289, 15, "Total de mortes: N/A", false, ucp.tab[2])
+    ucp.label[10] = guiCreateLabel(10, 160, 289, 15, "Conta:", false, ucp.tab[2])
     guiSetFont(ucp.label[10], "default-bold-small")
-    ucp.label[11] = guiCreateLabel(10, 185, 289, 15, "Total play time: 900 Days 23 Hours  59 Minutes", false, ucp.tab[2])
-    ucp.label[12] = guiCreateLabel(10, 201, 289, 15, "Joined: 21 August, 2017.", false, ucp.tab[2])
+    ucp.label[11] = guiCreateLabel(10, 185, 289, 15, "Tempo total de jogo: 900 Dias 23 Horas  59 Minutos", false, ucp.tab[2])
+    ucp.label[12] = guiCreateLabel(10, 201, 289, 15, "Entrou: 21 Agosto, 2017.", false, ucp.tab[2])
 
-    ucp.tab[3] = guiCreateTab("Account", ucp.tabpanel[1])
+    ucp.tab[3] = guiCreateTab("Conta", ucp.tabpanel[1])
 
-    ucp.label[13] = guiCreateLabel(10, 10, 289, 15, "Email:", false, ucp.tab[3])
+    ucp.label[13] = guiCreateLabel(10, 10, 289, 15, "E-Mail:", false, ucp.tab[3])
     guiSetFont(ucp.label[13], "default-bold-small")
     ucp.edit[1] = guiCreateEdit(10, 35, 289, 23, "email@gmail.com", false, ucp.tab[3])
     guiEditSetReadOnly(ucp.edit[1], true)
     guiEditSetMaxLength(ucp.edit[1], 100)
-    ucp.label[14] = guiCreateLabel(16, 58, 277, 15, "*for security purposes, you can't change your email.", false, ucp.tab[3])
+    ucp.label[14] = guiCreateLabel(16, 58, 277, 15, "*por segurança, você não pode alterar seu e-mail.", false, ucp.tab[3])
     guiSetFont(ucp.label[14], "default-small")
     ucp.edit[2] = guiCreateEdit(10, 108, 289, 23, "", false, ucp.tab[3])
     guiEditSetMasked(ucp.edit[2], true)
     guiEditSetMaxLength(ucp.edit[2], 100)
-    ucp.label[15] = guiCreateLabel(10, 83, 70, 15, "Password:", false, ucp.tab[3])
+    ucp.label[15] = guiCreateLabel(10, 83, 70, 15, "Senha:", false, ucp.tab[3])
     guiSetFont(ucp.label[15], "default-bold-small")
     ucp.label[16] = guiCreateLabel(80, 83, 213, 15, "", false, ucp.tab[3])
     guiLabelSetHorizontalAlign(ucp.label[16], "right", false)
     guiSetFont(ucp.label[16], "default")
-    ucp.label[17] = guiCreateLabel(16, 131, 277, 15, "*old password", false, ucp.tab[3])
+    ucp.label[17] = guiCreateLabel(16, 131, 277, 15, "*senha antiga", false, ucp.tab[3])
     guiSetFont(ucp.label[17], "default-small")
     ucp.edit[3] = guiCreateEdit(10, 156, 289, 23, "", false, ucp.tab[3])
     guiEditSetMasked(ucp.edit[3], true)
     guiEditSetMaxLength(ucp.edit[3], 100)
-    ucp.label[18] = guiCreateLabel(16, 179, 277, 15, "*new password", false, ucp.tab[3])
+    ucp.label[18] = guiCreateLabel(16, 179, 277, 15, "*nova senha", false, ucp.tab[3])
     guiSetFont(ucp.label[18], "default-small")
-    ucp.button[1] = guiCreateButton(181, 189, 112, 30, "Change Password", false, ucp.tab[3])
+    ucp.button[1] = guiCreateButton(181, 189, 112, 30, "Alterar Senha", false, ucp.tab[3])
 
     loadXML(); -- load xml file or create if it doesn't exist
 end
@@ -236,18 +236,18 @@ addEventHandler("onClientResourceStop",resourceRoot,function()
 end);
 
 local monthToName = {
-    [1] = "January";
-    [2] = "February";
-    [3] = "March";
-    [4] = "April";
-    [5] = "May";
-    [6] = "June";
-    [7] = "July";
-    [8] = "August";
-    [9] = "September";
-    [10] = "October";
-    [11] = "November";
-    [12] = "December";
+    [1] = "Janeiro";
+    [2] = "Fevereiro";
+    [3] = "Março";
+    [4] = "Abril";
+    [5] = "Maio";
+    [6] = "Junho";
+    [7] = "Julho";
+    [8] = "Agosto";
+    [9] = "Setembro";
+    [10] = "Outubro";
+    [11] = "Novembro";
+    [12] = "Dezembro";
 }
 
 setTimer(function()
@@ -259,13 +259,13 @@ setTimer(function()
         time.month = time.month+1;
         time.year = time.year+1900;
         guiSetText(ucp.edit[1],getElementData(localPlayer,"stats.email"));
-        guiSetText(ucp.label[5],"Total zombies killed: "..getElementData(localPlayer,"stats.zombieskilled"));
-        guiSetText(ucp.label[6],"Total headshots: "..getElementData(localPlayer,"stats.headshots"));
-        guiSetText(ucp.label[7],"Total murders: "..getElementData(localPlayer,"stats.murders"));
-        guiSetText(ucp.label[8],"Total bandits killed: "..getElementData(localPlayer,"stats.banditskilled"));
-        guiSetText(ucp.label[9],"Total deaths: "..getElementData(localPlayer,"stats.deaths"));
-        guiSetText(ucp.label[11],"Total play time: "..days.." Days "..hours.." Hours "..minutes.." Minutes");
-        guiSetText(ucp.label[12],"Joined: "..time.monthday.." "..monthToName[time.month].." "..time.year);
+        guiSetText(ucp.label[5],"Total de zumbis mortos: "..getElementData(localPlayer,"stats.zombieskilled"));
+        guiSetText(ucp.label[6],"Total de tiros na cabeça: "..getElementData(localPlayer,"stats.headshots"));
+        guiSetText(ucp.label[7],"Total de assassinatos: "..getElementData(localPlayer,"stats.murders"));
+        guiSetText(ucp.label[8],"Total de bandidos mortos: "..getElementData(localPlayer,"stats.banditskilled"));
+        guiSetText(ucp.label[9],"Total de mortes: "..getElementData(localPlayer,"stats.deaths"));
+        guiSetText(ucp.label[11],"Tempo total de jogo: "..days.." Dias "..hours.." Horas "..minutes.." Minutos");
+        guiSetText(ucp.label[12],"Entrou: "..time.monthday.." "..monthToName[time.month].." "..time.year);
     end
 end,5000,0);
 
@@ -352,7 +352,7 @@ addEventHandler("onClientGUIClick",resourceRoot,function()
         if (string.len(new_pass) >= 5) then
             triggerServerEvent("set_account_pass",localPlayer,old_pass,new_pass)
         else
-            errorMessage("Password too short.",255,0,0);
+            errorMessage("Senha muito curta.",255,0,0);
         end
     end
 end);

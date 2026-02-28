@@ -99,16 +99,16 @@ function load_shop()
 						setElementFrozen(supplyDealer,true)
 						setPedVoice(supplyDealer, "PED_TYPE_DISABLED")
 						addEventHandler("onClientRender",root,function()
-							dxDrawTextOnElement(supplyDealer,"supply dealer",0.25,10,0,0,0,255,1.02,"sans")
-							dxDrawTextOnElement(supplyDealer,"supply dealer",0.26,10,0,200,100,255,1,"sans")
+							dxDrawTextOnElement(supplyDealer,"negociante de suprimentos",0.25,10,0,0,0,255,1.02,"sans")
+							dxDrawTextOnElement(supplyDealer,"negociante de suprimentos",0.26,10,0,200,100,255,1,"sans")
 						end)
 					elseif (i == "vehicle_dealer") then
 						local vehicleDealer = createPed(28,v[1],v[2],v[3],v[4],false)
 						setPedVoice(vehicleDealer, "PED_TYPE_DISABLED")
 						setElementFrozen(vehicleDealer,true)
 						addEventHandler("onClientRender",root,function()
-							dxDrawTextOnElement(vehicleDealer,"vehicle dealer",0.25,10,0,0,0,255,1.02,"sans")
-							dxDrawTextOnElement(vehicleDealer,"vehicle dealer",0.26,10,0,200,100,255,1,"sans")
+							dxDrawTextOnElement(vehicleDealer,"negociante de veículos",0.25,10,0,0,0,255,1.02,"sans")
+							dxDrawTextOnElement(vehicleDealer,"negociante de veículos",0.26,10,0,200,100,255,1,"sans")
 						end)
 					elseif (i == "supply_dealer_marker") then
 						local supplyShopMarker = createMarker(v[1],v[2],v[3]-1,"cylinder",0.62,0,255,0,69)
@@ -123,7 +123,7 @@ function load_shop()
 										shop_humanity_type = humanity_type;
 										updateShop();
 									else
-										outputChatBox("Dealer: You need to have atleast 5000 humanity in order to shop here.",200,55,0)
+										outputChatBox("Negociante: Você precisa ter pelo menos 5000 de humanidade para comprar aqui.",200,55,0)
 									end
 								elseif (humanity_type == "bandit") then
 									if (getElementData(source,"humanity") <= -5000) then
@@ -134,7 +134,7 @@ function load_shop()
 										shop_humanity_type = humanity_type;
 										updateShop();
 									else
-										outputChatBox("Dealer: You need to have atleast -5000 humanity in order to shop here.",200,55,0)
+										outputChatBox("Negociante: Você precisa ter pelo menos -5000 de humanidade para comprar aqui.",200,55,0)
 									end
 								elseif (humanity_type == "blackmarket" or humanity_type == "normal") then
 									guiSetVisible(shop_gui.window[1],true)
@@ -200,7 +200,7 @@ function load_shop()
 										vehicle_spawn_position = {v[4],v[5],v[6],v[7],v[8],v[9]}
 										updateShop();
 									else
-										outputChatBox("Dealer: You need to have atleast 5000 humanity in order to shop here.",200,55,0)
+										outputChatBox("Negociante: Você precisa ter pelo menos 5000 de humanidade para comprar aqui.",200,55,0)
 									end
 								elseif (humanity_type == "bandit") then
 									if (getElementData(source,"humanity") <= -5000) then
@@ -212,7 +212,7 @@ function load_shop()
 										vehicle_spawn_position = {v[4],v[5],v[6],v[7],v[8],v[9]}
 										updateShop();
 									else
-										outputChatBox("Dealer: You need to have atleast -5000 humanity in order to shop here.",200,55,0)
+										outputChatBox("Negociante: Você precisa ter pelo menos -5000 de humanidade para comprar aqui.",200,55,0)
 									end
 								elseif (humanity_type == "blackmarket" or humanity_type == "normal") then
 									guiSetVisible(shop_gui.window[1],true)

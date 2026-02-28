@@ -6,13 +6,13 @@ function messageGui()
 	guiSetVisible(messageWindow,false)
 
 	mwEditBoxMessage = guiCreateEdit(10, 27, 215, 25, "", false, messageWindow)
-	mwLabel = guiCreateLabel(10, 7, 215, 15, "ENTER GLOBAL MESSAGE", false, messageWindow)
+	mwLabel = guiCreateLabel(10, 7, 215, 15, "INSERIR MENSAGEM GLOBAL", false, messageWindow)
 	guiSetFont(mwLabel, "default-bold-small")
 	guiLabelSetHorizontalAlign(mwLabel, "center", false)
 
-	mwButton = guiCreateButton(10, 58, 102, 25, "send", false, messageWindow)
+	mwButton = guiCreateButton(10, 58, 102, 25, "enviar", false, messageWindow)
 
-	mwButtonClose = guiCreateButton(122, 58, 102, 25, "close", false, messageWindow)
+	mwButtonClose = guiCreateButton(122, 58, 102, 25, "fechar", false, messageWindow)
 	addEventHandler("onClientGUIClick",buttonGlobalMessage,openMessageGui,false)
 	addEventHandler("onClientGUIClick",mwButtonClose,closeMessageGui,false)
 	addEventHandler("onClientGUIClick",mwButton,sendGlobalMessage,false)
